@@ -14,39 +14,46 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   function handleClick(event) {
-    if (event.target.value === 'stepMinus') {
-      setStepCount((prev) => prev - 1);
-    } else if (event.target.value === 'stepPlus') {
-      setStepCount((prev) => prev + 1);
-    } else if (event.target.value === 'countMinus') {
+    if (event.target.value === 'countMinus') {
       setCount((prev) => prev - stepCount);
     } else if (event.target.value === 'countPlus') {
       setCount((prev) => prev + stepCount);
     }
   }
 
+  function handleChange(event) {
+    setStepCount((prev) => Number(event.target.value));
+  }
+
+  function handleInputChange(event) {
+    setCount((prev) => Number(event.target.value));
+  }
+
+  function reset(event) {
+    setStepCount(1);
+    setCount(0);
+  }
+
   const currentDate = new Date();
   const targetDate = new Date(currentDate);
   targetDate.setDate(currentDate.getDate() - count * -1);
 
-  // function dayOfTheWeek() {}
-
   return (
     <>
       <div>
-        <button value='stepMinus' onClick={handleClick}>
-          -
-        </button>
+        <input
+          type='range'
+          min='0'
+          max='10'
+          value={stepCount}
+          onChange={handleChange}></input>
         Step: {stepCount}
-        <button value='stepPlus' onClick={handleClick}>
-          +
-        </button>
       </div>
       <div>
         <button value='countMinus' onClick={handleClick}>
           -
         </button>
-        Count: {count}
+        <input type='text' value={count} onChange={handleInputChange}></input>
         <button value='countPlus' onClick={handleClick}>
           +
         </button>
@@ -59,6 +66,11 @@ function Counter() {
           {count < 0 &&
             `${count * -1} days ago was ${targetDate.toDateString()}`}
         </p>
+        {stepCount !== 1 || count !== 0 ? (
+          <button onClick={reset}>Reset</button>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );
