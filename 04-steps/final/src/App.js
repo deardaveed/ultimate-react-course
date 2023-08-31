@@ -30,12 +30,12 @@ function Steps() {
   // const [test, setTest] = useState({ name: "Jonas" });
 
   function handlePrevious() {
-    if (step > 1) setStep((s) => s - 1);
+    if (step > 1) setStep(s => s - 1);
   }
 
   function handleNext() {
     if (step < 3) {
-      setStep((s) => s + 1);
+      setStep(s => s + 1);
       // setStep((s) => s + 1);
     }
 
@@ -46,7 +46,9 @@ function Steps() {
 
   return (
     <div>
-      <button className="close" onClick={() => setIsOpen((is) => !is)}>
+      <button
+        className="close"
+        onClick={() => setIsOpen(is => !is)}>
         &times;
       </button>
 
@@ -64,19 +66,24 @@ function Steps() {
               <Button
                 bgColor="#e7e7e7"
                 textColor="#333"
-                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
-              >
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}>
                 Learn how
               </Button>
             </div>
           </StepMessage>
 
           <div className="buttons">
-            <Button bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}>
+            <Button
+              bgColor="#7950f2"
+              textColor="#fff"
+              onClick={handlePrevious}>
               <span>👈</span> Previous
             </Button>
 
-            <Button bgColor="#7950f2" textColor="#fff" onClick={handleNext}>
+            <Button
+              bgColor="#7950f2"
+              textColor="#fff"
+              onClick={handleNext}>
               Next <span>👉</span>
               <span>🤓</span>
             </Button>
@@ -100,8 +107,7 @@ function Button({ textColor, bgColor, onClick, children }) {
   return (
     <button
       style={{ backgroundColor: bgColor, color: textColor }}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       {children}
     </button>
   );
